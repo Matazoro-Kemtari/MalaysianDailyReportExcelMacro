@@ -47,8 +47,10 @@ Private Function OpenDailyReport(ByRef MySettings As Settings, _
                                  ByVal Target As String) As Workbook
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
+    ' ファイル名を設定のフォルダとファイル名のサフィックスで作成
     Dim FileName As String
-    FileName = fso.BuildPath(MySettings.DailyReportDirectory, Target & MySettings.DailyReportFileName)
+    FileName = fso.BuildPath(MySettings.DailyReportDirectory, _
+                             Target & MySettings.DailyReportSuffix)
     If Not fso.FileExists(FileName) Then
         Exit Function
     End If

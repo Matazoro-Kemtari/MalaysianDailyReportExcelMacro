@@ -6,7 +6,7 @@ Function GetSettings() As Settings
     Call MySettings.BuildOnce( _
         Sheet1.Range("DailyReportDirectory"), _
         Sheet1.Range("SummaryDirectory"), _
-        Sheet1.Range("DailyReportFileName"), _
+        Sheet1.Range("DailyReportSuffix"), _
         Sheet1.Range("SummaryFileName") _
     )
     Set GetSettings = MySettings
