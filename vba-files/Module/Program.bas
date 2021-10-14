@@ -10,9 +10,14 @@ Public Const DIFFERENCE_ADD_IN_HASH As Long = vbObjectError + 518
 Public Const ARGUMENT_OUT_OF_RANGE_EXCEPTION As Long = vbObjectError + 519
 Public Const ARGUMENT_NULL_EXCEPTION As Long = vbObjectError + 520
 Public Const DUPLICATE_WORKSHEET_NAMES_EXCEPTION As Long = vbObjectError + 521
+Public Const COLLECT_BOOK_EXISTS_EXCEPTION As Long = vbObjectError + 522
 
 ' 日報収集ボタンイベント
 Sub CollectAttendanceButton_Click()
+    ' 画面更新を止める
+    Dim Screen As ScreenDrawer
+    Set Screen = New ScreenDrawer
+
     On Error Goto CATCH_EXCEPTION
 
     ' 設定を取得
@@ -25,6 +30,11 @@ Sub CollectAttendanceButton_Click()
     Dim TargetWorkers() As Variant
     TargetWorkers = GetTargets()
 
+    ' 集計ファイル存在確認
+    Call CollectBookExists(MySettings, _
+                         TargetYear, _
+                         TargetMonth)
+
     ' 日報収集
     Call CollectAttendance(MySettings, _
                            TargetYear, _
@@ -32,12 +42,16 @@ Sub CollectAttendanceButton_Click()
                            TargetWorkers)
 
     ' 収集保存
+    Call SaveCollect(MySettings, TargetYear, TargetMonth)
 
     Exit Sub
 
 CATCH_EXCEPTION:
     Select Case Err.Number
-    Case ARGUMENT_OUT_OF_RANGE_EXCEPTION, ARGUMENT_NULL_EXCEPTION, DUPLICATE_WORKSHEET_NAMES_EXCEPTION
+    Case ARGUMENT_OUT_OF_RANGE_EXCEPTION, _
+         ARGUMENT_NULL_EXCEPTION, _
+         DUPLICATE_WORKSHEET_NAMES_EXCEPTION, _
+         COLLECT_BOOK_EXISTS_EXCEPTION
         MsgBox Err.Description, vbCritical
     Case Else
         Err.Raise Err
