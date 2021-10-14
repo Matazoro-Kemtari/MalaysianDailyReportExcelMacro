@@ -13,7 +13,7 @@ Private canInitialize As Boolean
 
 Private fDailyReportDirectory As String
 Private fSummaryDirectory As String
-Private fDailyReportFileName As String
+Private fDailyReportSuffix As String
 Private fSummaryFileName As String
 
 Private Sub Class_Initialize ()
@@ -23,12 +23,12 @@ End Sub
 ' コンストラクタに引数を持たす代用
 Public Sub BuildOnce(ByVal DailyReportDirectory As String, _
                      ByVal SummaryDirectory As String, _
-                     ByVal DailyReportFileName As String, _
+                     ByVal DailyReportSuffix As String, _
                      ByVal SummaryFileName As String)
     if canInitialize Then
         fDailyReportDirectory = DailyReportDirectory
         fSummaryDirectory = SummaryDirectory
-        fDailyReportFileName = DailyReportFileName
+        fDailyReportSuffix = DailyReportSuffix
         fSummaryFileName = SummaryFileName
         canInitialize = False
     End If
@@ -42,8 +42,8 @@ Public Property Get SummaryDirectory() As String
     SummaryDirectory = fSummaryDirectory
 End Property
 
-Public Property Get DailyReportFileName() As String
-    DailyReportFileName = fDailyReportFileName
+Public Property Get DailyReportSuffix() As String
+    DailyReportSuffix = fDailyReportSuffix
 End Property
 
 Public Property Get SummaryFileName() As String
