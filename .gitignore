@@ -372,5 +372,6 @@ Thumbs.db
 ehthumbs.db
 
 out/*
+TestData/*
 
 README.pdf
