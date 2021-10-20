@@ -97,26 +97,26 @@ Private Function CopyAttendance(ByRef ReportBook As Workbook, ByRef Collector As
     Dim cnt As Long
     cnt = repoTbl.AutoFilter.Range.Columns(1).SpecialCells(xlCellTypeVisible).Count - 1
 
-    repoTbl.ListColumns("日付").DataBodyRange.Copy
+    repoTbl.ListColumns("date").DataBodyRange.Copy
     Collector.NewRange("日付").PasteSpecial Paste:=xlPasteValues
     Collector.NewRange("日付").Resize(RowSize:=cnt).NumberFormatLocal = "yyyy/m/d"
     ReportBook.Sheets(1).Range("EmployeeNumber").Copy
     Collector.NewRange("社員番号").Resize(RowSize:=cnt).PasteSpecial Paste:=xlPasteValues
     ReportBook.Sheets(1).Range("EmployeeName").Copy
     Collector.NewRange("氏名").Resize(RowSize:=cnt).PasteSpecial Paste:=xlPasteValues
-    repoTbl.ListColumns("残業区分").DataBodyRange.Copy
+    repoTbl.ListColumns("Work type").DataBodyRange.Copy
     Collector.NewRange("残業区分").PasteSpecial Paste:=xlPasteValues
-    repoTbl.ListColumns("工数").DataBodyRange.Copy
+    repoTbl.ListColumns("Time").DataBodyRange.Copy
     Collector.NewRange("実働時間").PasteSpecial Paste:=xlPasteValues
-    repoTbl.ListColumns("作業番号").DataBodyRange.Copy
+    repoTbl.ListColumns("work number").DataBodyRange.Copy
     Collector.NewRange("作業番号").PasteSpecial Paste:=xlPasteValues
-    repoTbl.ListColumns("コード").DataBodyRange.Copy
+    repoTbl.ListColumns("code").DataBodyRange.Copy
     Collector.NewRange("コード").PasteSpecial Paste:=xlPasteValues
-    repoTbl.ListColumns("特記事項").DataBodyRange.Copy
+    repoTbl.ListColumns("Notes").DataBodyRange.Copy
     Collector.NewRange("特記事項").PasteSpecial Paste:=xlPasteValues
-    repoTbl.ListColumns("大分類").DataBodyRange.Copy
+    repoTbl.ListColumns("class 1").DataBodyRange.Copy
     Collector.NewRange("大分類").PasteSpecial Paste:=xlPasteValues
-    repoTbl.ListColumns("中分類").DataBodyRange.Copy
+    repoTbl.ListColumns("class 2").DataBodyRange.Copy
     Collector.NewRange("中分類").PasteSpecial Paste:=xlPasteValues
 
     Collector.Flash
@@ -128,7 +128,7 @@ Private Function RemoveAttendance(ByRef ReportBook As Workbook)
     Dim cnt As Long
     cnt = repoTbl.AutoFilter.Range.Columns(1).SpecialCells(xlCellTypeVisible).Count - 1
 
-    repoTbl.ListColumns("日付").DataBodyRange.EntireRow.Delete
+    repoTbl.ListColumns("date").DataBodyRange.EntireRow.Delete
     Dim i As Long
     For i = 1 To cnt
         repoTbl.ListRows.Add
